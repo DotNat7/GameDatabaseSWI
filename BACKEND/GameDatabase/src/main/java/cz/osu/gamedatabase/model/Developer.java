@@ -19,12 +19,13 @@ public class Developer {
     @NotNull
     private String name;
 
+    @NotNull
     private String country;
 
     @NotNull
     private LocalDateTime created;
 
-    private LocalDateTime update;
+    private LocalDateTime updated;
 
     public Developer() {
     }
@@ -63,8 +64,8 @@ public class Developer {
         return created;
     }
 
-    public LocalDateTime getUpdate() {
-        return update;
+    public LocalDateTime getUpdated() {
+        return updated;
     }
 
     public void setId(Long id) {
@@ -87,7 +88,7 @@ public class Developer {
         this.created = created;
     }
 
-    public void setUpdate(LocalDateTime update) {
-        this.update = update;
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
     }
 }

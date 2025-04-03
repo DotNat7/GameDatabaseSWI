@@ -10,9 +10,6 @@ public interface GameService {
     Game read(Long id);
     Game update(GameRequest request);
     void delete(Long id);
-    //List<Game> list(String direction, String attribute);
-
     List<Game> list();
-
     List<Game> listByDeveloper(Long developerId);
 }

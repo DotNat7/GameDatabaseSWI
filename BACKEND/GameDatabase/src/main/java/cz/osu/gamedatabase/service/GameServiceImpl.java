@@ -46,7 +46,6 @@ public class GameServiceImpl implements GameService {
         game.setGenre(request.getGenre());
         game.setRating(request.getRating());
         game.setDescription(request.getDescription());
-        game.setIsInEarlyAccess(request.getIsInEarlyAccess());
 
         manageDevelopers(game, request);
 
@@ -63,17 +62,6 @@ public class GameServiceImpl implements GameService {
     public List<Game> list() {
         return gameRepository.findAll();
     }
-
-//    @Override
-//    public List<Game> list(String direction, String attribute) {
-//        List<Game> ret;
-//        try {
-//            ret = gameRepository.findAll(Sort.by(Sort.Direction.fromString(direction), attribute));
-//        } catch (PropertyReferenceException e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-//        }
-//        return ret;
-//    }
 
     @Override
     public List<Game> listByDeveloper(Long developerId) {

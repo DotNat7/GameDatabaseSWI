@@ -8,8 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-//neco neco
-// GameController Fix
+
 @CrossOrigin("http://localhost:3000")
 @RestController
 public class GameController {
@@ -39,18 +38,13 @@ public class GameController {
         gameService.delete(id);
     }
 
-//    @GetMapping("/games")
-//    public List<Game> getGames(@RequestParam(required = false, defaultValue = "ASC") String direction, @RequestParam(required = false, defaultValue = "date")String attribute) {
-//        return gameService.list(direction, attribute);
-//    }
-
     @GetMapping("/games")
     public List<Game> getGames() {
         return gameService.list();
     }
 
 
-    @GetMapping("/games/forDevelopers")
+    @GetMapping("/games/forDeveloper")
     public List<Game> getGamesForDeveloper(@RequestParam Long developerId) {
         return gameService.listByDeveloper(developerId);
     }

@@ -10,24 +10,6 @@ import java.util.Set;
 @Table(name = "Games")
 public class Game {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @NotNull
-    private String name;
-    private String genre;
-    private double rating;
-    private String description;
-    private boolean isInEarlyAccess;
-
-    @ManyToMany
-    @JoinTable(name = "DevelopersInGames",
-            joinColumns = @JoinColumn(name = "GameId"),
-            inverseJoinColumns = @JoinColumn(name = "DeveloperId"))
-
-    private Set<Developer> developers;
-
     public Game() {
     }
 
@@ -37,8 +19,28 @@ public class Game {
         genre = request.getGenre();
         rating = request.getRating();
         description = request.getDescription();
-        isInEarlyAccess = request.getIsInEarlyAccess();
     }
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NotNull
+    private String name;
+
+    private String genre;
+
+    private double rating;
+
+    private String description;
+
+    @ManyToMany
+    @JoinTable(name = "DevelopersInGames",
+            inverseJoinColumns = @JoinColumn(name = "DeveloperId"),
+            joinColumns = @JoinColumn(name = "GameId")
+    )
+
+    private Set<Developer> developers;
 
     public Long getId() {
         return id;
@@ -58,10 +60,6 @@ public class Game {
 
     public String getDescription() {
         return description;
-    }
-
-    public boolean getIsInEarlyAccess() {
-        return isInEarlyAccess;
     }
 
     public Set<Developer> getDevelopers() {
@@ -86,10 +84,6 @@ public class Game {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setIsInEarlyAccess(boolean inEarlyAccess) {
-        isInEarlyAccess = inEarlyAccess;
     }
 
     public void setDevelopers(Set<Developer> developers) {

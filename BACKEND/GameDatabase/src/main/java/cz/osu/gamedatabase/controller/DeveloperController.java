@@ -19,12 +19,8 @@ public class DeveloperController {
     }
 
     @PostMapping("/developers")
-    public ResponseEntity<?> postDeveloper(@RequestBody @Validated DeveloperRequest developer) {
-        try {
-            return ResponseEntity.ok(developerService.create(developer));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+    public Developer postDeveloper(@RequestBody @Validated DeveloperRequest developer) {
+        return developerService.create(developer);
     }
 
     @GetMapping("/developers")

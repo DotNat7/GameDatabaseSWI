@@ -41,7 +41,8 @@ public class DeveloperServiceImpl implements DeveloperService {
         var fromDb = read(developer.getId());
 
         fromDb.setName(developer.getName());
-        fromDb.setUpdate(LocalDateTime.now());
+        fromDb.setCountry(developer.getCountry());
+        fromDb.setUpdated(LocalDateTime.now());
         var ret = developerRepository.save(fromDb);
 
         return ret;
@@ -58,7 +59,7 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Override
     public List<Developer> list() {
-        return developerRepository.findAll();
+        return developerRepository.findAllByOrderByCreatedAsc();
     }
 
     @Override

@@ -11,7 +11,7 @@ public class GameRequest {
     private String genre;
     private double rating;
     private String description;
-    private boolean isInEarlyAccess;
+
     private Set<Long> DeveloperIds;
 
     public Long getId() {
@@ -32,10 +32,6 @@ public class GameRequest {
 
     public String getDescription() {
         return description;
-    }
-
-    public boolean getIsInEarlyAccess() {
-        return isInEarlyAccess;
     }
 
     public Set<Long> getDeveloperIds() {
@@ -60,10 +56,6 @@ public class GameRequest {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setIsInEarlyAccess(boolean inEarlyAccess) {
-        isInEarlyAccess = inEarlyAccess;
     }
 
     public void setDeveloperIds(Set<Long> developerIds) {
