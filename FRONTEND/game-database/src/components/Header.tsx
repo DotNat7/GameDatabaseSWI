@@ -13,11 +13,11 @@ const Header = () => {
                         <LinkContainer to="/">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/games">
-                            <Nav.Link>Games</Nav.Link>
-                        </LinkContainer>
                         <LinkContainer to="/developers">
                             <Nav.Link>Developers</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/games">
+                            <Nav.Link>Games</Nav.Link>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>

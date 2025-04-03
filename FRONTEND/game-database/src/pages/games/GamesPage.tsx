@@ -5,7 +5,9 @@ import GameView from "./GameView";
 import ApiClient from "../../client/ApiClient";
 import {GameRequest} from "../../model/GameRequest";
 import NewGame from "./NewGame";
+import {useNavigate} from "react-router-dom";
 const GamesPage = () => {
+    const navigate = useNavigate();
     const [games, setGames] = useState<Game[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     useEffect(() => {
@@ -13,29 +15,40 @@ const GamesPage = () => {
             setGames(games);
         });
     }, []);
-    const deleteGame = (id: number) => {
+
+    const onDelete = (id: number) => {
         ApiClient.deleteGame(id).then(() => {
-            setGames(games.filter(g => g.id !== id));
+            let originalList = games?.filter(x => x.id !== id);
+            setGames(originalList);
+        }).catch(err => alert(JSON.stringify(err)));
+    };
+
+    const onUpdate = (id: number) => {
+        navigate("/games/" + id);
+    };
+
+    const createGame = (game: GameRequest) => {
+        ApiClient.createGame(game).then(g => {
+            let originalList = games.slice();
+            originalList.push(g);
+            setGames(originalList);
+            setShowModal(false);
         });
     };
-    const saveGame = (gameRequest: GameRequest) => {
-        ApiClient.saveGame(gameRequest).then(g => {
-            const originalArray = games.slice();
-            originalArray.push(g);
-            setGames(originalArray);
-        });
-    };
+
     return (
         <>
             <Stack direction="horizontal" gap={3}>
                 <h2>Games</h2>
+                <Button variant="success" size="sm" onClick={() => setShowModal(true)}>+</Button>
             </Stack>
-            <Stack direction="horizontal" gap={3} className="mt-3">
-                {games.map((game, index) => <GameView onDelete={deleteGame} game={game} key={index} /> )}
-                <Button variant="success" size="lg" onClick={() => setShowModal(true)}>Add more</Button>
+
+            <hr />
+            <Stack direction="horizontal" gap={3}>
+                {games ? games.map((game, index) => <GameView key={index} game={game} deleteHandler={onDelete} updateHandler={onUpdate} />) : <p>No games was found</p>}
             </Stack>
-            <NewGame show={showModal} onClose={() => setShowModal(false)} onSave={gr => saveGame(gr)} />
+            <NewGame externalShow={showModal} createHandler={game => createGame(game)} />
         </>
-    )
+    );
 };
 export default GamesPage;

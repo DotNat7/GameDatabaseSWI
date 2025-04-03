@@ -12,7 +12,7 @@ export const DeveloperDetailPage = () => {
     const [developer, setDeveloper] = useState<Developer | null>(null);
     const [games, setGames] = useState<Game[]>([]);
     useEffect(() => {
-        ApiClient.getDeveloper(Number(id)).then(d => {
+        ApiClient.getDeveloper(Number.parseInt(id as string)).then(d => {
             setDeveloper(d);
             ApiClient.getGamesForDeveloper(d.id).then(gms => {
                 setGames(gms);
@@ -22,16 +22,18 @@ export const DeveloperDetailPage = () => {
             alert(err);
         });
     }, [id, navigate]);
-    const nameChange = (newName: string) => {
+
+    const updateName = (newName: string) => {
       const originalDeveloper = Object.assign({}, developer);
       originalDeveloper.name = newName;
       setDeveloper(originalDeveloper);
     };
-    const countryChange = (newCountry: string) => {
+    const updateCountry = (newCountry: string) => {
         const originalDeveloper = Object.assign({}, developer);
         originalDeveloper.country = newCountry;
         setDeveloper(originalDeveloper);
     };
+
     const goToGame = (gameId: number) => {
         navigate("/games/"+gameId);
     };
@@ -48,11 +50,19 @@ export const DeveloperDetailPage = () => {
             <Form>
                 <Form.Group>
                     <Form.Label>Developer name</Form.Label>
-                    <Form.Control value={developer?.name} onChange={ev => nameChange(ev.target.value)}/>
+                    <Form.Control value={developer?.name} onChange={ev => updateName(ev.target.value)}/>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Country</Form.Label>
-                    <Form.Control value={developer?.country} onChange={ev => countryChange(ev.target.value)}/>
+                    <Form.Control value={developer?.country} onChange={ev => updateCountry(ev.target.value)}/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Created</Form.Label>
+                    <Form.Control defaultValue={developer?.created?.toString()} type='datetime' disabled />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Updated</Form.Label>
+                    <Form.Control defaultValue={developer?.updated?.toString()} type='datetime' disabled />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Games</Form.Label>

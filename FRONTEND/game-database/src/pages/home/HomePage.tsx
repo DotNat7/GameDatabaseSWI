@@ -10,8 +10,8 @@ const HomePage = () => {
                 <h1>GameDatabase</h1>
                 <h3>Check it out</h3>
             <div className={"d-flex gap-3"}>
-                <Button variant="outline-dark" size="lg" onClick={() => navigate("/games")}>Games</Button>
                 <Button variant="success" size="lg" onClick={() => navigate("/developers")}>Developers</Button>
+                <Button variant="outline-dark" size="lg" onClick={() => navigate("/games")}>Games</Button>
             </div>
         </div>
         </>

@@ -12,6 +12,8 @@ export const GameChip: React.FC<GameChipParams> = ({game}) => {
             <Card.Body>
                 <Stack direction='vertical' gap={1}>
                     <strong>{game.name}</strong>
+                    {game.genre ? <span>{game.genre}</span> : <></>}
+                    
                     {game.description ? <span>{game.description}</span> : <></>}
                 </Stack>
             </Card.Body>
