@@ -30,7 +30,7 @@ class DeveloperServiceImplTest {
     @Test
     void canListDevelopers() {
         underTest.list();
-        verify(developerRepository).findAll();
+        verify(developerRepository).findAllByOrderByCreatedAsc();
     }
 
 }
